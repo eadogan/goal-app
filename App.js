@@ -9,6 +9,9 @@ export default function App() {
   const [isAddMode, setIsAddMode] = useState(false);
 
   const addGoalHandler = inputData => {
+    if(inputData.length === 0) {
+      return;
+    }
     setCourseGoals(currentGoals => [
       ...courseGoals, 
       {id: Math.random().toString(), value: inputData}
@@ -17,6 +20,7 @@ export default function App() {
   };
 
   const removeGoalHandler = goalId => {
+    console.info('To be deleted: '+goalId);
     setCourseGoals(currentGoals => {
       return currentGoals.filter((goal) => goal.id !== goalId);
     });
@@ -41,7 +45,8 @@ export default function App() {
                                   id={itemData.item.id} 
                                   onDelete={removeGoalHandler} 
                                   title={itemData.item.value}
-                                />} 
+                                />
+                              } 
       />
     </View>
   );
